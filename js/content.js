@@ -1,54 +1,4 @@
-// 방문한 공고 ID를 저장하는 함수
-function markAsVisited(jobId) {
-    chrome.storage.local.get(['visitedJobs'], function(result) {
-        let visitedJobs = result.visitedJobs || [];
-        if (!visitedJobs.includes(jobId)) {
-            visitedJobs.push(jobId);
-            chrome.storage.local.set({ visitedJobs: visitedJobs });
-        }
-    });
-}
-
-// 체크마크 SVG 생성
-function createCheckmarkSVG() {
-    return `
-        <svg xmlns="http://www.w3.org/2000/svg" 
-             width="16" 
-             height="16" 
-             viewBox="0 0 24 24" 
-             style="fill: white;">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-        </svg>
-    `;
-}
-
-// 방문 표시 요소 생성 및 스타일 직접 적용
-function createVisitedMark() {
-    const visitedMark = document.createElement('div');
-    visitedMark.className = 'visited-mark';
-    
-    // 인라인 스타일 직접 적용
-    Object.assign(visitedMark.style, {
-        position: 'absolute',
-        bottom: '10px',
-        left: '10px',
-        backgroundColor: '#00c853',
-        width: '24px',
-        height: '24px',
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: '999999',
-        pointerEvents: 'none',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-    });
-    
-    visitedMark.innerHTML = createCheckmarkSVG();
-    return visitedMark;
-}
-
-// 방문 표시를 적용하는 함수
+// Function to apply visit marks
 function markVisitedJobs() {
     chrome.storage.local.get(['visitedJobs'], function(result) {
         const visitedJobs = result.visitedJobs || [];
@@ -72,7 +22,7 @@ function markVisitedJobs() {
     });
 }
 
-// 클릭한 공고 ID 저장
+// Save clicked job ID
 function saveClickedJob(jobId) {
     chrome.storage.local.get(['visitedJobs'], function(result) {
         const visitedJobs = result.visitedJobs || [];
@@ -83,13 +33,7 @@ function saveClickedJob(jobId) {
     });
 }
 
-// 방문 표시 제거 함수
-function removeVisitedMarks() {
-    const marks = document.querySelectorAll('.visited-mark');
-    marks.forEach(mark => mark.remove());
-}
-
-// 클릭 이벤트 리스너 설정
+// Set up click event listeners
 function setupClickListeners() {
     document.addEventListener('click', function(e) {
         const jobLink = e.target.closest('a[data-position-id]');
@@ -102,26 +46,26 @@ function setupClickListeners() {
     });
 }
 
-// 메인 페이지인지 확인하는 함수
+// Check if the current page is the main page
 function isMainPage() {
     return !window.location.pathname.startsWith('/wd/');
 }
 
-// 초기화 및 실행
+// Set up observer for DOM changes
+const observer = new MutationObserver(function(mutations) {
+    markVisitedJobs();
+});
+
+// Start observing
+observer.observe(document.body, { 
+    childList: true, 
+    subtree: true 
+});
+
+// Initialize and execute
 (function() {
     if (isMainPage()) {
         setupClickListeners();
         markVisitedJobs();
     }
 })();
-
-// DOM 변경 감지를 위한 옵저버 설정
-const observer = new MutationObserver(function(mutations) {
-    markVisitedJobs();
-});
-
-// 옵저버 시작
-observer.observe(document.body, { 
-    childList: true, 
-    subtree: true 
-});
