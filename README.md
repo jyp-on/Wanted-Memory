@@ -10,7 +10,7 @@ A Chrome extension that helps you track job postings you've visited on Wanted.co
 
 ## Installation
 
-1. Clone this repository
+1. Download the zip file from the repository and unzip it.
 2. Open Chrome and navigate to `chrome://extensions/`
 3. Enable "Developer mode" in the top right
 4. Click "Load unpacked" and select the extension directory
@@ -28,6 +28,10 @@ Simply browse Wanted.co.kr as usual. The extension will:
 - Uses Chrome Storage API for persistence
 - Implements MutationObserver for real-time updates
 - Compatible with Chrome Manifest V3
+
+## Pull Requests
+
+- Contributions are welcome!
 
 ## Version
 
