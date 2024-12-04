@@ -10,10 +10,15 @@ A Chrome extension that helps you track job postings you've visited on Wanted.co
 
 ## Installation
 
-1. Download the zip file from the repository and unzip it.
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" in the top right
-4. Click "Load unpacked" and select the extension directory
+1. **Chrome Web Store**
+    * Search for "Wanted Memory" in the Chrome Web Store.
+    * Install this plugin using Chrome Web Store.
+
+2. **(Optional) Manual installation**
+    * Download the zip file from the repository and unzip it.
+    * Open Chrome and navigate to `chrome://extensions/`
+    * Enable "Developer mode" in the top right
+    * Click "Load unpacked" and select the extension directory
 
 ## Usage
 
