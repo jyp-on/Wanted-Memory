@@ -1,25 +1,31 @@
-// Function to apply visit marks
+// Function to apply visit marks with debouncing
+let markVisitedJobsTimeout;
 function markVisitedJobs() {
-    chrome.storage.local.get(['visitedJobs'], function(result) {
-        const visitedJobs = result.visitedJobs || [];
-        const jobCards = document.querySelectorAll('ul[data-cy="job-list"] > li > div.JobCard_JobCard__Tb7pI');
-        
-        jobCards.forEach(card => {
-            const link = card.querySelector('a[data-position-id]');
-            if (!link) return;
+    if (markVisitedJobsTimeout) {
+        clearTimeout(markVisitedJobsTimeout);
+    }
+    
+    markVisitedJobsTimeout = setTimeout(() => {
+        chrome.storage.local.get(['visitedJobs'], function(result) {
+            const visitedJobs = result.visitedJobs || [];
+            const jobCards = document.querySelectorAll('ul[data-cy="job-list"] > li > div.JobCard_JobCard__Tb7pI');
             
-            const jobId = link.getAttribute('data-position-id');
-            const thumbArea = card.querySelector('.JobCard_JobCard__thumb__WU1ax');
-            
-            if (visitedJobs.includes(jobId) && thumbArea) {
-                const existingMark = thumbArea.querySelector('.visited-mark');
-                if (existingMark) {
-                    existingMark.remove();
+            jobCards.forEach(card => {
+                const link = card.querySelector('a[data-position-id]');
+                if (!link) return;
+                
+                const jobId = link.getAttribute('data-position-id');
+                const thumbArea = card.querySelector('.JobCard_JobCard__thumb__WU1ax');
+                
+                if (visitedJobs.includes(jobId) && thumbArea) {
+                    const existingMark = thumbArea.querySelector('.visited-mark');
+                    if (!existingMark) {
+                        thumbArea.appendChild(createVisitedMark());
+                    }
                 }
-                thumbArea.appendChild(createVisitedMark());
-            }
+            });
         });
-    });
+    }, 300); // 300ms 딜레이
 }
 
 // Create a visual marker for visited job posts
@@ -61,9 +67,16 @@ function isMainPage() {
     return !window.location.pathname.startsWith('/wd/');
 }
 
-// Set up observer for DOM changes
+// Set up observer for DOM changes with throttling
+let lastObserverRun = 0;
+const THROTTLE_DELAY = 1000; // 1초
+
 const observer = new MutationObserver(function(mutations) {
-    markVisitedJobs();
+    const now = Date.now();
+    if (now - lastObserverRun >= THROTTLE_DELAY) {
+        markVisitedJobs();
+        lastObserverRun = now;
+    }
 });
 
 // Start observing
