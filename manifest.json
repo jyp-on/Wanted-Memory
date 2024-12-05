@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "Wanted Memory",
-    "version": "1.0.0",
-    "description": "Chrome extension that tracks and marks visited job postings on Wanted.",
+    "version": "1.0.1",
+    "description": "원티드 채용공고의 방문 기록을 표시해주는 크롬 확장 프로그램입니다.",
     "permissions": [
       "storage"
     ],
