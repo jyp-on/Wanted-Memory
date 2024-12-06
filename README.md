@@ -11,18 +11,21 @@ A Chrome extension that helps you track job postings you've visited on Wanted.co
 ## Installation
 
 1. **Chrome Web Store**
-    * Search for "Wanted Memory" in the Chrome Web Store.
-    * Install this plugin using Chrome Web Store.
+
+   - Search for "Wanted Memory" in the Chrome Web Store.
+   - Install this plugin using Chrome Web Store.
+   - Or, Directly access here - [Chrome Web Store](https://github.com/faker007/Wanted-Memory.git)
 
 2. **(Optional) Manual installation**
-    * Download the zip file from the repository and unzip it.
-    * Open Chrome and navigate to `chrome://extensions/`
-    * Enable "Developer mode" in the top right
-    * Click "Load unpacked" and select the extension directory
+   - Download the zip file from the repository and unzip it.
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" in the top right
+   - Click "Load unpacked" and select the extension directory
 
 ## Usage
 
 Simply browse Wanted.co.kr as usual. The extension will:
+
 - Mark job postings you've already visited
 - Track new visits automatically
 - Update the UI in real-time
