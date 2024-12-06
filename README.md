@@ -14,7 +14,7 @@ A Chrome extension that helps you track job postings you've visited on Wanted.co
 
    - Search for "Wanted Memory" in the Chrome Web Store.
    - Install this plugin using Chrome Web Store.
-   - Or, Directly access here - [Chrome Web Store](https://github.com/faker007/Wanted-Memory.git)
+   - Or, Directly access here - [Chrome Web Store](https://chromewebstore.google.com/detail/wanted-memory/cnffpcbpjhgabikopmibghmebgfcnnee)
 
 2. **(Optional) Manual installation**
    - Download the zip file from the repository and unzip it.
