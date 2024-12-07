@@ -61,34 +61,3 @@ function setupClickListeners() {
         }
     });
 }
-
-// Check if the current page is the main page
-function isMainPage() {
-    return !window.location.pathname.startsWith('/wd/');
-}
-
-// Set up observer for DOM changes with throttling
-let lastObserverRun = 0;
-const THROTTLE_DELAY = 1000; // 1초
-
-const observer = new MutationObserver(function(mutations) {
-    const now = Date.now();
-    if (now - lastObserverRun >= THROTTLE_DELAY) {
-        markVisitedJobs();
-        lastObserverRun = now;
-    }
-});
-
-// Start observing
-observer.observe(document.body, { 
-    childList: true, 
-    subtree: true 
-});
-
-// Initialize and execute
-(function() {
-    if (isMainPage()) {
-        setupClickListeners();
-        markVisitedJobs();
-    }
-})();
