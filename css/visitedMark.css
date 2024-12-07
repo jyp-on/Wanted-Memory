@@ -1,0 +1,18 @@
+.visited-mark {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 10px !important;
+    background-color: #15ff00f4 !important;
+    border-radius: 50% !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.visited-mark svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: white !important;
+} 
