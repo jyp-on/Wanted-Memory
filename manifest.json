@@ -1,16 +1,28 @@
 {
     "manifest_version": 3,
     "name": "Wanted Memory",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "원티드 채용공고의 방문 기록을 표시해주는 크롬 확장 프로그램입니다.",
     "permissions": [
-      "storage"
+        "storage",
+        "scripting",
+        "tabs"
+    ],
+    "host_permissions": [
+        "https://www.wanted.co.kr/*"
     ],
     "content_scripts": [
       {
         "matches": ["https://www.wanted.co.kr/*"],
-        "css": ["css/content.css"],
-        "js": ["js/content.js"]
+        "css": [
+            "css/visitedMark.css",
+            "css/hideMark.css"
+        ],
+        "js": [
+            "js/visitedMark.js",
+            "js/hideMark.js",
+            "js/main.js"
+        ]
       }
     ],
     "action": {
