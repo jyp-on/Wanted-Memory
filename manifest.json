@@ -4,9 +4,7 @@
     "version": "1.0.2",
     "description": "원티드 채용공고의 방문 기록을 표시해주는 크롬 확장 프로그램입니다.",
     "permissions": [
-        "storage",
-        "scripting",
-        "tabs"
+        "storage"
     ],
     "host_permissions": [
         "https://www.wanted.co.kr/*"
